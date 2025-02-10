@@ -1,0 +1,19 @@
+@import 'variables';
+
+header {
+    height: 60px;
+    width: 100%;
+    background-color: $red;
+    color: $white;
+    align-items: center;
+    padding: 10px 3%;
+    font-size: 1rem;
+    font-weight: 400;
+
+    div:last-of-type {
+        &:hover {
+            cursor: pointer;
+            color: $brown;
+        }
+    }
+}
