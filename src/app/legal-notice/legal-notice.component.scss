@@ -14,16 +14,6 @@
     justify-content: space-between;
 }
 
-h2 {
-    color: $red;
-    font-size: min(14vmin, 2rem);
-}
-
-h3 {
-    color: $red;
-    font-size: min(9vmin, 1.5rem);
-}
-
 a, span {
     font-family: $textfont;
 }
@@ -34,6 +24,7 @@ a {
     &:hover {
         cursor: pointer;
         filter: brightness(0.8);
+        transition: all 125ms ease-in-out;
     }
 }
 
@@ -45,6 +36,7 @@ a {
 
     &:hover {
         filter: brightness(0.8);
+        transition: all 125ms ease-in-out;
     }
 }
 
@@ -54,7 +46,7 @@ a {
         height: 100%;
     }
 
-    .legal-notice-container h3 {
+    .legal-notice-container h2 {
         font-weight: 600 !important;
     }
 }

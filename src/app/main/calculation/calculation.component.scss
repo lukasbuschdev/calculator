@@ -13,6 +13,8 @@ section {
  
         .name {
             width: 40%;
+            font-weight: 600;
+            word-break: break-word;
         }
 
         .data {
@@ -34,6 +36,7 @@ section {
                 color: $white;
                 background-color: $red;
                 box-shadow: 1px 1px 4px 3px  $lightgray;
+                transition: all 125ms ease-in-out;
             }
         }
 
@@ -52,17 +55,24 @@ section {
     }
 }
 
+.result {
+    font-weight: 600;
+}
 
 .btn-calc {
     background-color: $red;
     color: $white;
     padding: 15px 25px;
+    border: 2px solid $red;
     border-radius: 999px;
     box-shadow: 1px 1px 4px 1px  $lightgray;
+    transition: all 125ms ease-in-out;
     
     &:hover {
         cursor: pointer;
-        color: $brown;
+        color: $red;
+        background-color: $white;
         box-shadow: 1px 1px 4px 3px  $lightgray;
+        transition: all 125ms ease-in-out;
     }
 }

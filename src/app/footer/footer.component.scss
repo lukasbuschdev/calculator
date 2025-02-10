@@ -10,6 +10,7 @@ footer {
     .legal-notice:hover {
         cursor: pointer;
         color: $brown;
+        transition: all 125ms ease-in-out;
     }
 }
 

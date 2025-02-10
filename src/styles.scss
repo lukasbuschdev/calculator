@@ -52,6 +52,10 @@
   scroll-behavior: smooth;
 }
 
+*:hover {
+  transition: all 125ms ease-in-out;
+}
+
 html,
 body {
   overflow: auto !important;
@@ -100,6 +104,26 @@ button {
 .logo {
   height: 50px;
   width: 50px;
+}
+
+h1 {
+  color: $red;
+  font-size: min(14vmin, 2rem);
+}
+
+h2 {
+  color: $red;
+  font-size: min(14vmin, 1.5rem);
+}
+
+h3 {
+  color: $red;
+  font-size: min(14vmin, 1.2rem);
+}
+
+h4 {
+  color: $black;
+  font-size: min(14vmin, 1rem);
 }
 
 $gap-sizes: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 100;

@@ -11,7 +11,8 @@ header {
     font-weight: 400;
 
     .heading {
-        font-size: 1.3rem;
+        color: $white;
+        font-weight: 400;
     }
 
     .languages span:first-of-type,
@@ -19,6 +20,7 @@ header {
         &:hover {
             cursor: pointer;
             color: $brown;
+            transition: all 125ms ease-in-out;
         }
     }
 }
