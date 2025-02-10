@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { DescriptionComponent } from "./description/description.component";
+import { CalculationComponent } from "./calculation/calculation.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [],
+  imports: [DescriptionComponent, CalculationComponent, DescriptionComponent, CalculationComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

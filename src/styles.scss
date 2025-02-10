@@ -77,26 +77,9 @@ button {
   align-items: center;
 }
 
-.left {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .between {
   display: flex;
   justify-content: space-between;
-}
-
-.around {
-  display: flex;
-  justify-content: space-around;
 }
 
 .column {
@@ -109,64 +92,22 @@ button {
   flex-direction: row;
 }
 
-.absolute {
-  position: absolute;
+.align-center {
+  display: flex;
+  align-items: center;
 }
 
-.gap-5 {
-  gap: 5px;
+.logo {
+  height: 50px;
+  width: 50px;
 }
 
-.gap-10 {
-  gap: 10px;
-}
+$gap-sizes: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 100;
 
-.gap-15 {
-  gap: 15px;
-}
-
-.gap-20 {
-  gap: 20px;
-}
-
-.gap-25 {
-  gap: 25px;
-}
-
-.gap-30 {
-  gap: 30px;
-}
-
-h1 {
-  font-size: clamp(3rem, 5vw + 1rem, 6rem);
-  font-weight: 800;
-  font-family: $headingfont;
-  line-height: 0.8;
-  color: $blue;
-}
-
-h2 {
-  font-size: min(13vmin, 4.5rem);
-  font-weight: 700;
-  font-family: $headingfont;
-  line-height: 1;
-  color: $blue;
-}
-
-h3 {
-  font-size: min(10vmin, 3rem);
-  font-weight: 700;
-  font-family: $headingfont;
-  line-height: 1;
-  color: $blue;
-}
-
-h4 {
-  font-size: min(9vmin, 1.8rem);
-  font-weight: 700;
-  font-family: $headingfont;
-  line-height: 1;
-  color: $blue;
+@each $size in $gap-sizes {
+  .gap-#{$size} {
+    gap: $size * 1px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -204,104 +145,4 @@ input[type="number"] {
 
 input[type="number"] {
   -ms-appearance: none !important;
-}
-
-// Dark Mode
-
-.dark-mode {
-  background-image: none !important;
-  background-color: $darkmode !important;
-  transition: background-color 200ms ease-in-out;
-}
-
-.dark-mode-text {
-  color: $white !important;
-  transition: color 200ms ease-in-out;
-}
-
-.dark-mode-text-dark {
-  color: $darkmode !important;
-  transition: color 200ms ease-in-out;
-}
-
-.dark-mode-img {
-  filter: brightness(0.75) !important;
-  transition: filter 200ms ease-in-out;
-}
-
-.dark-mode-btn:hover {
-  background-color: $darkmode !important;
-  transition: background-color 200ms ease-in-out;
-}
-
-.dark-mode-privacy-legal {
-  background-color: $darkmode;
-  transition: background-color 200ms ease-in-out;
-
-  p,
-  span,
-  a,
-  li {
-    color: $white;
-    transition: color 200ms ease-in-out;
-  }
-}
-
-// ANIMATIONS
-
-// Fade in from the left
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-// Fade in from the right
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-// Fade in from the bottom
-@keyframes fadeInBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease-out;
-}
-
-.fade-in-left {
-  opacity: 0;
-  animation: fadeInLeft 500ms ease-out forwards;
-}
-
-.fade-in-right {
-  opacity: 0;
-  animation: fadeInRight 500ms ease-out forwards;
-}
-
-.fade-in-bottom {
-  opacity: 0;
-  animation: fadeInBottom 500ms ease-out forwards;
 }
