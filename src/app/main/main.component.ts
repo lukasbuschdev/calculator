@@ -5,7 +5,7 @@ import { CalculationComponent } from "./calculation/calculation.component";
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [DescriptionComponent, CalculationComponent, DescriptionComponent, CalculationComponent],
+  imports: [DescriptionComponent, CalculationComponent, DescriptionComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

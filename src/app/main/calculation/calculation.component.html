@@ -1,28 +1,54 @@
-<section class="column center gap-60">
+<section class="column center gap-60" (click)="closeCurrencies(); closeFrequencies();">
     <div class="data-input-container column gap-35">
         <div class="row between data-row">
             <div class="name">Currency:</div>
-            <div class="btn data">MXN</div>
+            <div class="dropdown" [class.active]="isCurrencyOpened">
+                <div (click)="openCurrencies($event)" class="dropdown-btn data">{{ selectedCurrency }}</div>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let currency of selectableCurrencies" (click)="selectCurrency(currency)">
+                        <span>{{ currency }}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="row between data-row">
             <div class="name">Pay Frequency:</div>
-            <div class="row gap-10 data">
-                <div class="btn">Monthly</div>
-                <div class="btn">Yearly</div>
+            <div class="dropdown" [class.active]="isFrequencyOpened">
+                <div (click)="openFrequencies($event)" class="dropdown-btn data">{{ selectedFrequency }}</div>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let frequency of selectableFrequencies" (click)="selectFrequency(frequency)">
+                        <span>{{ frequency }}</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row between data-row">
             <div class="name">Salary:</div>
-            <input class="data" type="number">
+            <input class="data" type="number" #salary>
         </div>
     </div>
 
     <div class="center">
-        <div class="btn-calc center">Calculate</div>
+        <div class="btn-calc center" (click)="calculate(salary.value)">Calculate</div>
     </div>
 
-    <div class="center gap-20">
-        <div class="result">Result:</div>
-        <div></div>
+    <div class="column gap-20 result-container">
+        <div class="align-center between">
+            <h3>Result (monthly):</h3>
+            <h3 class="result">{{ monthlySalary }} MXN</h3>
+        </div>
+        <div class="align-center between">
+            <h3>Result (yearly):</h3>
+            <h3 class="result">{{ yearlySalary }} MXN</h3>
+        </div>
+        <div class="division-line"></div>
+        <div class="align-center between">
+            <h3>Tax paid (monthly):</h3>
+            <h3 class="result">{{ taxPaidMonthly }} MXN</h3>
+        </div>
+        <div class="align-center between">
+            <h3>Tax paid (yearly):</h3>
+            <h3 class="result">{{ taxPaidYearly }} MXN</h3>
+        </div>
     </div>
 </section>
