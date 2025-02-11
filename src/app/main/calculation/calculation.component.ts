@@ -97,18 +97,15 @@ export class CalculationComponent implements OnInit {
 
   calculate(): void {
     const convertedSalary = this.convertCurrency(this.salary);
-    const convertedYearlySalary = this.convertToYearlySalary(convertedSalary);
-    const salaryClass = this.checkSalaryRange(convertedYearlySalary);
-    const calculatedSalary = this.calculateSalary(convertedYearlySalary, salaryClass);
+    const convertedMonthlySalary = this.convertToMonthlySalary(convertedSalary);
+    const salaryClass = this.checkSalaryRange(convertedMonthlySalary);
+    const calculatedSalary = this.calculateSalary(convertedMonthlySalary, salaryClass);
 
     const formattedYearlySalary = this.formatNumber(Number(calculatedSalary.toFixed(2)));
     const formattedMonthlySalary = this.formatNumber(Number((calculatedSalary / 12).toFixed(2)));
 
     this.yearlySalary = formattedYearlySalary;
     this.monthlySalary = formattedMonthlySalary;
-
-    console.log(convertedYearlySalary)
-    console.log(calculatedSalary)
 
     this.salary = '';
   }
@@ -122,9 +119,9 @@ export class CalculationComponent implements OnInit {
     return Number(salaryInMXN);
   }
 
-  convertToYearlySalary(convertedSalary: number): number { 
-    if(this.selectedFrequency == 'Monthly' || this.selectedFrequency == 'Mensual') return Number(convertedSalary * 12);
-    if(this.selectedFrequency == 'Semi monthly' || this.selectedFrequency == 'Quincenal') return Number(convertedSalary * 2 * 12);
+  convertToMonthlySalary(convertedSalary: number): number { 
+    if(this.selectedFrequency == 'Yearly' || this.selectedFrequency == 'Anual') return Number(convertedSalary / 12);
+    if(this.selectedFrequency == 'Semi monthly' || this.selectedFrequency == 'Quincenal') return Number(convertedSalary * 2);
     return convertedSalary;
   }
 
@@ -137,16 +134,13 @@ export class CalculationComponent implements OnInit {
   }
 
   calculateSalary(convertedSalary: number, salaryClass: SalaryClass): number {
-    const taxYearly = (convertedSalary - salaryClass.min) * (salaryClass.percent / 100) + salaryClass.fee;
-    const taxMonthly = taxYearly / 12;
-
-    console.log(taxMonthly)
+    const taxMonthly = (convertedSalary - salaryClass.min) * (salaryClass.percent / 100) + salaryClass.fee;
+    const taxYearly = taxMonthly * 12;
     
     this.taxPaidYearly = this.formatNumber(Number(taxYearly.toFixed(2)));
     this.taxPaidMonthly = this.formatNumber(Number(taxMonthly.toFixed(2)));
     
-    const calculatedSalary = convertedSalary - taxYearly;
-    console.log(calculatedSalary)
+    const calculatedSalary = (convertedSalary - taxMonthly) * 12;
     
     return Number(calculatedSalary.toFixed(2));
   }
