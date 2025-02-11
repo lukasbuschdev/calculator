@@ -6,7 +6,7 @@ header {
     background-color: $red;
     color: $white;
     align-items: center;
-    padding: 10px 3%;
+    padding: 10px 5%;
     font-size: 1rem;
     font-weight: 400;
 
@@ -21,6 +21,16 @@ header {
             cursor: pointer;
             color: $brown;
             transition: all 125ms ease-in-out;
+        }
+    }
+}
+
+@media(max-width: 400px) {
+    .logo-heading {
+        gap: 10px;
+
+        .heading {
+            font-size: 1.2rem;
         }
     }
 }

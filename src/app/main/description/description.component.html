@@ -1,34 +1,42 @@
 <div class="column gap-45 description-container">
     <div class="column gap-15">
-        <h2>Disclaimer</h2>
-        <span>
-            This calculator estimates your expected monthly after-tax salary in Mexico. 
-            Although it uses official data, the accuracy of the results is not guaranteed. 
-            The figures provided are for informational purposes only, and no legal claims can be derived from them.
-        </span>
+        <h2>{{ languageService.translate('disclaimer-heading') }}</h2>
+        <span>{{ languageService.translate('disclaimer-text') }}</span>
     </div>
 
     <div class="column gap-25">
         <div>
-            <h3>How to use:</h3>
+            <h3>{{ languageService.translate('how-to-use-heading') }}</h3>
         </div>
 
         <div class="column gap-15">
             <div class="row gap-10">
-                <h4 class="step">Step 1:</h4>
-                <span>Select the currency in which you earn money.</span>
+                <div class="row step gap-5">
+                    <h4>{{ languageService.translate('step') }}</h4>
+                    <h4>1:</h4>
+                </div>
+                <span>{{ languageService.translate('step1') }}</span>
             </div>
             <div class="row gap-10">
-                <h4 class="step">Step 2:</h4>
-                <span>Choose whether you earn yearly, monthly or semi monthly.</span>
+                <div class="row step gap-5">
+                    <h4>{{ languageService.translate('step') }}</h4>
+                    <h4>2:</h4>
+                </div>
+                <span>{{ languageService.translate('step2') }}</span>
             </div>
             <div class="row gap-10">
-                <h4 class="step">Step 3:</h4>
-                <span>Enter your salary amount.</span>
+                <div class="row step gap-5">
+                    <h4>{{ languageService.translate('step') }}</h4>
+                    <h4>3:</h4>
+                </div>
+                <span>{{ languageService.translate('step3') }}</span>
             </div>
             <div class="row gap-10">
-                <h4 class="step">Step 4:</h4>
-                <span>Click "Calculate" to view the results.</span>
+                <div class="row step gap-5">
+                    <h4>{{ languageService.translate('step') }}</h4>
+                    <h4>4:</h4>
+                </div>
+                <span>{{ languageService.translate('step4') }}</span>
             </div>
         </div>
     </div>

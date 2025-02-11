@@ -1,11 +1,11 @@
 <header class="row between">
-    <div class="row gap-20 align-center">
+    <div class="row gap-20 align-center logo-heading">
         <img class="logo" src="./assets/img/logo.png">
-        <h2 class="heading">Calculator</h2>
+        <h2 class="heading">{{ languageService.translate('heading') }}</h2>
     </div>
     <div class="languages row gap-10">
-        <span>EN</span>
+        <span (click)="languageService.switchLanguage('en')">EN</span>
         <span>|</span>
-        <span>ES</span>
+        <span (click)="languageService.switchLanguage('es')">ES</span>
     </div>
 </header>

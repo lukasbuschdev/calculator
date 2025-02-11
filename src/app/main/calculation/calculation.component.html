@@ -1,7 +1,7 @@
 <section class="column center gap-60" (click)="closeCurrencies(); closeFrequencies();">
     <div class="data-input-container column gap-35">
         <div class="row between data-row">
-            <div class="name">Currency:</div>
+            <div class="name">{{ languageService.translate('currency') }}</div>
             <div class="dropdown" [class.active]="isCurrencyOpened">
                 <div (click)="openCurrencies($event)" class="dropdown-btn data">{{ selectedCurrency }}</div>
                 <ul class="dropdown-menu">
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row between data-row">
-            <div class="name">Pay Frequency:</div>
+            <div class="name">{{ languageService.translate('pay-frequency') }}</div>
             <div class="dropdown" [class.active]="isFrequencyOpened">
                 <div (click)="openFrequencies($event)" class="dropdown-btn data">{{ selectedFrequency }}</div>
                 <ul class="dropdown-menu">
@@ -23,31 +23,31 @@
             </div>
         </div>
         <div class="row between data-row">
-            <div class="name">Salary:</div>
+            <div class="name">{{ languageService.translate('salary') }}</div>
             <input class="data" type="number" #salary>
         </div>
     </div>
 
     <div class="center">
-        <div class="btn-calc center" (click)="calculate(salary.value)">Calculate</div>
+        <div class="btn-calc center" (click)="calculate(salary.value)">{{ languageService.translate('calculate') }}</div>
     </div>
 
     <div class="column gap-20 result-container">
-        <div class="align-center between">
-            <h3>Result (monthly):</h3>
+        <div class="align-center between gap-15">
+            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate('monthly') }}):</h3>
             <h3 class="result">{{ monthlySalary }} MXN</h3>
         </div>
-        <div class="align-center between">
-            <h3>Result (yearly):</h3>
+        <div class="align-center between gap-15">
+            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate('yearly') }}):</h3>
             <h3 class="result">{{ yearlySalary }} MXN</h3>
         </div>
         <div class="division-line"></div>
-        <div class="align-center between">
-            <h3>Tax paid (monthly):</h3>
+        <div class="align-center between gap-15">
+            <h3>{{ languageService.translate('tax') }} ({{ languageService.translate('monthly') }}):</h3>
             <h3 class="result">{{ taxPaidMonthly }} MXN</h3>
         </div>
-        <div class="align-center between">
-            <h3>Tax paid (yearly):</h3>
+        <div class="align-center between gap-15">
+            <h3>{{ languageService.translate('tax') }} ({{ languageService.translate('yearly') }}):</h3>
             <h3 class="result">{{ taxPaidYearly }} MXN</h3>
         </div>
     </div>

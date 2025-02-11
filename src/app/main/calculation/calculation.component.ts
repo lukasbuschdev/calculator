@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeRateService } from '../../exchange-rate.service';
 import { CommonModule } from '@angular/common';
 import { SalaryClass } from '../../types/salary-class.type';
+import { LanguageService } from '../../language.service';
 
 @Component({
   selector: 'app-calculation',
@@ -13,9 +14,9 @@ import { SalaryClass } from '../../types/salary-class.type';
 export class CalculationComponent implements OnInit {
   currencies: any;
   selectedCurrency: string = 'MXN';
-  selectedFrequency: string = 'Yearly';
+  selectedFrequency: string = '';
   selectableCurrencies: string[] = ['MXN', 'USD', 'EUR', 'CAD', 'CHF', 'GBP'];
-  selectableFrequencies: string[] = ['Semi monthly', 'Monthly', 'Yearly'];
+  selectableFrequencies: string[] = [];
   isCurrencyOpened: boolean = false;
   isFrequencyOpened: boolean = false;
   isSelected: boolean = false;
@@ -26,22 +27,30 @@ export class CalculationComponent implements OnInit {
   taxPaidMonthly: string = '0';
 
   salaryClasses: SalaryClass[] = [
-    { min: 0,         max: 746.04,    label: 'Class 1',  fee: 0,         percent: 1.92  },
-    { min: 746.05,    max: 6332.05,   label: 'Class 2',  fee: 14.23,     percent: 6.40  },
-    { min: 6332.06,   max: 11128.01,  label: 'Class 3',  fee: 371.83,    percent: 10.88 },
-    { min: 11128.02,  max: 12935.82,  label: 'Class 4',  fee: 893.63,    percent: 16.00 },
-    { min: 12935.83,  max: 15487.71,  label: 'Class 5',  fee: 1182.88,   percent: 17.92 },
-    { min: 15487.72,  max: 31236.49,  label: 'Class 6',  fee: 1640.18,   percent: 21.36 },
-    { min: 31236.50,  max: 49233.00,  label: 'Class 7',  fee: 5004.12,   percent: 23.52 },
-    { min: 49233.01,  max: 93993.90,  label: 'Class 8',  fee: 9236.89,   percent: 30.00 },
-    { min: 93993.91,  max: 125325.20, label: 'Class 9',  fee: 22665.17,  percent: 32.00 },
-    { min: 125325.21, max: 375975.61, label: 'Class 10', fee: 32691.17,  percent: 34.00 },
-    { min: 375975.62, max: Infinity,  label: 'Class 11', fee: 132691.18, percent: 35.00 }
+    { min: 0,         max: 746.04,    fee: 0,         percent: 1.92  },
+    { min: 746.05,    max: 6332.05,   fee: 14.23,     percent: 6.40  },
+    { min: 6332.06,   max: 11128.01,  fee: 371.83,    percent: 10.88 },
+    { min: 11128.02,  max: 12935.82,  fee: 893.63,    percent: 16.00 },
+    { min: 12935.83,  max: 15487.71,  fee: 1182.88,   percent: 17.92 },
+    { min: 15487.72,  max: 31236.49,  fee: 1640.18,   percent: 21.36 },
+    { min: 31236.50,  max: 49233.00,  fee: 5004.12,   percent: 23.52 },
+    { min: 49233.01,  max: 93993.90,  fee: 9236.89,   percent: 30.00 },
+    { min: 93993.91,  max: 125325.20, fee: 22665.17,  percent: 32.00 },
+    { min: 125325.21, max: 375975.61, fee: 32691.17,  percent: 34.00 },
+    { min: 375975.62, max: Infinity,  fee: 132691.18, percent: 35.00 }
   ];
   
-  constructor(private exchangeRateService: ExchangeRateService) {}
+  constructor(public languageService: LanguageService, private exchangeRateService: ExchangeRateService) {}
 
   ngOnInit(): void {
+    this.languageService.switchLanguage('es');
+    this.languageService.translations$.subscribe( translations => {
+      if(translations) {
+        this.selectableFrequencies = translations['selectable-frequencies'];
+        this.selectedFrequency = translations['default-selected-frequency'] || 'Anual';
+      }
+    });
+
     this.exchangeRateService.getExchangeRates().subscribe({
       next: (data) => {
         this.currencies = data.data;
@@ -52,12 +61,14 @@ export class CalculationComponent implements OnInit {
 
   openCurrencies(event: MouseEvent) {
     event.stopPropagation();
-    this.isCurrencyOpened = true;
+    if(this.isCurrencyOpened) return this.isCurrencyOpened = false;
+    return this.isCurrencyOpened = true;
   }
   
   openFrequencies(event: MouseEvent) {
     event.stopPropagation();
-    this.isFrequencyOpened = true;
+    if(this.isFrequencyOpened) return this.isFrequencyOpened = false;
+    return this.isFrequencyOpened = true;
   }
 
   selectCurrency(selected: string) {
@@ -115,7 +126,7 @@ export class CalculationComponent implements OnInit {
       (salary: SalaryClass) => convertedSalary > salary.min && convertedSalary <= salary.max
     );
 
-    return salaryClass ? salaryClass : { min: 0, max: 0, label: 'Unknown', fee: 0, percent: 0 };
+    return salaryClass ? salaryClass : { min: 0, max: 0, fee: 0, percent: 0 };
   }
 
   calculateSalary(convertedSalary: number, salaryClass: SalaryClass): number {

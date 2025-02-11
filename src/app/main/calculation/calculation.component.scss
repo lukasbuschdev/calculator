@@ -38,6 +38,7 @@ section {
 
     .result {
         text-align: right;
+        white-space: nowrap;
     }
 
     .division-line {
@@ -94,7 +95,7 @@ section {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     background-color: $white;
     border: 1px solid #ddd;
     border-radius: 20px;

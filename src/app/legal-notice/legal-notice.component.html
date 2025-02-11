@@ -1,26 +1,25 @@
 <img id="back" routerLink="/main" src="./assets/img/arrow.svg">
 
 <div class="legal-notice-container column">
-    <h1 data-lang="legal-notice-heading">Legal Notice</h1>
     <div class="column gap-30 legal-notice-segments">
         <div class="column gap-20">
-            <h2 data-lang="legal-notice-heading-2">Legal Notice</h2>
+            <h2 data-lang="legal-notice-heading-2">{{ languageService.translate('legal-notice') }}</h2>
             <div class="column gap-10">
                 <span>Lukas Busch</span>
-                <span>Calle 41 595 2 por 84A y 84B</span>
-                <span>97000 Merida</span>
-                <span data-lang="mexico">Mexico</span>
+                <span>Calle 41 595</span>
+                <span>97000 {{ languageService.translate('city') }}</span>
+                <span data-lang="mexico">{{ languageService.translate('country') }}</span>
             </div>
         </div>
     
         <div class="column gap-20">
-            <h2 data-lang="legal-notice-heading-3">Contact</h2>
+            <h2 data-lang="legal-notice-heading-3">{{ languageService.translate('contact') }}</h2>
             <div class="column gap-10">
                 <div class="row gap-10">
-                    <span data-lang="phone">Phone:</span><a href="tel:+529993518061">+52 999 351 80 61</a>
+                    <span data-lang="phone">{{ languageService.translate('phone') }}: </span><a href="tel:+529993518061">+52 999 351 80 61</a>
                 </div>
                 <span>
-                    E-Mail:
+                    {{ languageService.translate('mail') }}: 
                     <a href="mailto: webdeveloper@lukasbusch.dev">webdeveloper&#64;lukasbusch.dev</a>
                 </span>
             </div>
