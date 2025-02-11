@@ -1,7 +1,7 @@
 {
     "heading": "Calculator",
     "disclaimer-heading": "Disclaimer",
-    "disclaimer-text": "This calculator estimates your expected monthly after-tax salary in Mexico. Although it uses official data, the accuracy of the results is not guaranteed. The figures provided are for informational purposes only, and no legal claims can be derived from them.",
+    "disclaimer-text": "This calculator estimates your monthly after-tax salary in Mexico. Please note that payments to the IMSS (Instituto Mexicano del Seguro Social) are not included in this calculation. Although official data is used, the accuracy of the results is not guaranteed. The figures provided are for informational purposes only and should not be construed as legal advice.",
     "how-to-use-heading": "How to use:",
     "step": "Step",
     "step1": "Select the currency in which you earn money.",

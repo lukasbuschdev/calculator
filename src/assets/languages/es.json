@@ -1,7 +1,7 @@
 {
     "heading": "Calculadora",
     "disclaimer-heading": "Descripción",
-    "disclaimer-text": "Esta calculadora estima tu salario mensual neto en México después de impuestos. Aunque utiliza datos oficiales, no se garantiza la precisión de los resultados. Las cifras proporcionadas son únicamente para fines informativos y no se pueden derivar reclamaciones legales de ellas.",
+    "disclaimer-text": "Esta calculadora estima tu salario mensual neto en México. Ten en cuenta que los pagos al IMSS (Instituto Mexicano del Seguro Social) no están incluidos en este cálculo. Aunque se utilizan datos oficiales, no se garantiza la precisión de los resultados. Las cifras proporcionadas son únicamente para fines informativos y no deben interpretarse como asesoramiento legal.",
     "how-to-use-heading": "Cómo usar:",
     "step": "Paso",
     "step1": "Selecciona la moneda en la que ganas dinero.",
