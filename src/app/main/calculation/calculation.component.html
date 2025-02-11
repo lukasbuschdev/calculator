@@ -1,7 +1,7 @@
 <section class="column center gap-60" (click)="closeCurrencies(); closeFrequencies();">
     <div class="data-input-container column gap-35">
         <div class="row between data-row">
-            <div class="name">{{ languageService.translate('currency') }}</div>
+            <div class="name">{{ languageService.translate('currency') }}:</div>
             <div class="dropdown" [class.active]="isCurrencyOpened">
                 <div (click)="openCurrencies($event)" class="dropdown-btn data">{{ selectedCurrency }}</div>
                 <ul class="dropdown-menu">
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row between data-row">
-            <div class="name">{{ languageService.translate('pay-frequency') }}</div>
+            <div class="name">{{ languageService.translate('pay-frequency') }}:</div>
             <div class="dropdown" [class.active]="isFrequencyOpened">
                 <div (click)="openFrequencies($event)" class="dropdown-btn data">{{ selectedFrequency }}</div>
                 <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="row between data-row">
-            <div class="name">{{ languageService.translate('salary') }}</div>
+            <div class="name">{{ languageService.translate('salary') }}:</div>
             <input class="data" type="number" [(ngModel)]="salary">
         </div>
     </div>
