@@ -17,7 +17,6 @@ export class ExchangeRateService {
     if(localStorage.getItem('time') === null) return;
     this.cachedData = localStorage.getItem('data');
     this.lastFetchTime = Number(localStorage.getItem('time'));
-    console.log('Saved Data in use!')
   }
 
   getExchangeRates(): Observable<any> {
@@ -31,7 +30,6 @@ export class ExchangeRateService {
         this.lastFetchTime = Date.now();
         localStorage.setItem('data', JSON.stringify(this.cachedData));
         localStorage.setItem('time', JSON.stringify(this.lastFetchTime));
-        console.log('Request made!')
       })  
     );
   }
