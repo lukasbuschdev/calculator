@@ -59,41 +59,41 @@ export class CalculationComponent implements OnInit {
     });
   }
 
-  openCurrencies(event: MouseEvent) {
+  openCurrencies(event: MouseEvent): boolean {
     event.stopPropagation();
     if(this.isCurrencyOpened) return this.isCurrencyOpened = false;
     return this.isCurrencyOpened = true;
   }
   
-  openFrequencies(event: MouseEvent) {
+  openFrequencies(event: MouseEvent): boolean {
     event.stopPropagation();
     if(this.isFrequencyOpened) return this.isFrequencyOpened = false;
     return this.isFrequencyOpened = true;
   }
 
-  selectCurrency(selected: string) {
+  selectCurrency(selected: string): void {
     this.selectedCurrency = selected;
     this.closeCurrencies();
   }
 
-  selectFrequency(selected: string) {
+  selectFrequency(selected: string): void {
     this.selectedFrequency = selected;
     this.closeFrequencies();
   }
   
-  closeCurrencies() {
+  closeCurrencies(): void {
     this.isCurrencyOpened = false;
   }
 
-  closeFrequencies() {
+  closeFrequencies(): void {
     this.isFrequencyOpened = false;
   }
 
-  selectPaymentFrequency(selected: string) {
+  selectPaymentFrequency(selected: string): void {
     this.selectedFrequency = selected;
   }
 
-  calculate(salary: string) {
+  calculate(salary: string): void {
     const convertedSalary = this.convertCurrency(salary);
     const convertedYearlySalary = this.convertToYearlySalary(convertedSalary);
     const salaryClass = this.checkSalaryRange(convertedYearlySalary);
