@@ -24,12 +24,12 @@
         </div>
         <div class="row between data-row">
             <div class="name">{{ languageService.translate('salary') }}</div>
-            <input class="data" type="number" #salary>
+            <input class="data" type="number" [(ngModel)]="salary">
         </div>
     </div>
 
     <div class="center">
-        <div class="btn-calc center" (click)="calculate(salary.value)">{{ languageService.translate('calculate') }}</div>
+        <div class="btn-calc center" (click)="calculate()">{{ languageService.translate('calculate') }}</div>
     </div>
 
     <div class="column gap-20 result-container">

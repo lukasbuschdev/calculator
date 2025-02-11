@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeRateService } from '../../exchange-rate.service';
+import { ExchangeRateService } from '../../services/exchange-rate.service';
 import { CommonModule } from '@angular/common';
 import { SalaryClass } from '../../types/salary-class.type';
-import { LanguageService } from '../../language.service';
+import { LanguageService } from '../../services/language.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-calculation',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './calculation.component.html',
   styleUrls: ['./calculation.component.scss']
 })
 export class CalculationComponent implements OnInit {
+  salary: string = '';
   currencies: any;
   selectedCurrency: string = 'MXN';
   selectedFrequency: string = '';
@@ -93,17 +95,22 @@ export class CalculationComponent implements OnInit {
     this.selectedFrequency = selected;
   }
 
-  calculate(salary: string): void {
-    const convertedSalary = this.convertCurrency(salary);
+  calculate(): void {
+    const convertedSalary = this.convertCurrency(this.salary);
     const convertedYearlySalary = this.convertToYearlySalary(convertedSalary);
     const salaryClass = this.checkSalaryRange(convertedYearlySalary);
-    const calculatedSalary = this.calculateSalary(convertedSalary, salaryClass);
+    const calculatedSalary = this.calculateSalary(convertedYearlySalary, salaryClass);
 
     const formattedYearlySalary = this.formatNumber(Number(calculatedSalary.toFixed(2)));
     const formattedMonthlySalary = this.formatNumber(Number((calculatedSalary / 12).toFixed(2)));
 
     this.yearlySalary = formattedYearlySalary;
     this.monthlySalary = formattedMonthlySalary;
+
+    console.log(convertedYearlySalary)
+    console.log(calculatedSalary)
+
+    this.salary = '';
   }
 
   convertCurrency(salary: string): number {
@@ -116,8 +123,8 @@ export class CalculationComponent implements OnInit {
   }
 
   convertToYearlySalary(convertedSalary: number): number { 
-    if(this.selectedFrequency.toLocaleLowerCase() === 'monthly') return convertedSalary * 12;
-    if(this.selectedFrequency.toLocaleLowerCase() === 'semi monthly') return convertedSalary * 2 * 12;
+    if(this.selectedFrequency == 'Monthly' || this.selectedFrequency == 'Mensual') return Number(convertedSalary * 12);
+    if(this.selectedFrequency == 'Semi monthly' || this.selectedFrequency == 'Quincenal') return Number(convertedSalary * 2 * 12);
     return convertedSalary;
   }
 
@@ -133,11 +140,14 @@ export class CalculationComponent implements OnInit {
     const taxYearly = (convertedSalary - salaryClass.min) * (salaryClass.percent / 100) + salaryClass.fee;
     const taxMonthly = taxYearly / 12;
 
+    console.log(taxMonthly)
+    
     this.taxPaidYearly = this.formatNumber(Number(taxYearly.toFixed(2)));
     this.taxPaidMonthly = this.formatNumber(Number(taxMonthly.toFixed(2)));
-
+    
     const calculatedSalary = convertedSalary - taxYearly;
-
+    console.log(calculatedSalary)
+    
     return Number(calculatedSalary.toFixed(2));
   }
 

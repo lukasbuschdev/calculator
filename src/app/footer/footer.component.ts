@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LanguageService } from '../language.service';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-footer',
