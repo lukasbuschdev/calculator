@@ -89,6 +89,11 @@ section {
       color: $white;
       background-color: $red;
     }
+
+    img {
+        height: 15px;
+        width: 20px;
+    }
 }
   
 .dropdown-menu {
@@ -110,25 +115,36 @@ section {
 }
   
 .dropdown-menu li {
-    list-style: none;
+    padding: 5px 15px;
+}
+
+.dropdown-menu li img {
+    height: 30px;
+    width: 20px;
 }
   
 .dropdown-menu li span {
     display: block;
-    padding: 10px 20px;
     color: #333;
     text-decoration: none;
     transition: background-color 125ms, color 125ms;
 }
   
-.dropdown-menu li span:hover {
+.dropdown-menu li:hover {
     background-color: $red;
+}
+
+.dropdown-menu li:hover span {
     color: $white;
 }
     
 .dropdown.active .dropdown-menu {
     display: block;
 }  
+
+.dropdown-menu.frequency li span {
+    padding: 5px 10px;
+}
 
 
 

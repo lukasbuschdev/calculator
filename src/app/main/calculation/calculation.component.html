@@ -3,9 +3,13 @@
         <div class="row between data-row">
             <div class="name">{{ languageService.translate('currency') }}:</div>
             <div class="dropdown" [class.active]="isCurrencyOpened">
-                <div (click)="openCurrencies($event)" class="dropdown-btn data">{{ selectedCurrency }}</div>
+                <div (click)="openCurrencies($event)" class="dropdown-btn data align-center gap-10">
+                    <img src="./assets/img/{{ selectedCurrency }}.svg">
+                    <span>{{ selectedCurrency }}</span>
+                </div>
                 <ul class="dropdown-menu">
-                    <li *ngFor="let currency of selectableCurrencies" (click)="selectCurrency(currency)">
+                    <li *ngFor="let currency of selectableCurrencies" (click)="selectCurrency(currency)" class="row gap-10 align-center">
+                        <img src="./assets/img/{{ currency }}.svg">
                         <span>{{ currency }}</span>
                     </li>
                 </ul>
@@ -15,7 +19,7 @@
             <div class="name">{{ languageService.translate('pay-frequency') }}:</div>
             <div class="dropdown" [class.active]="isFrequencyOpened">
                 <div (click)="openFrequencies($event)" class="dropdown-btn data">{{ selectedFrequency }}</div>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu frequency">
                     <li *ngFor="let frequency of selectableFrequencies" (click)="selectFrequency(frequency)">
                         <span>{{ frequency }}</span>
                     </li>
