@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LanguageService {
   private translationsSubject = new BehaviorSubject<any>({});
   public translations$ = this.translationsSubject.asObservable();
+  public isActiveLanguage = 'es';
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +20,7 @@ export class LanguageService {
     this.loadTranslations(languageCode).subscribe({
       next: (data) => {
         this.translationsSubject.next(data);
+        this.isActiveLanguage = languageCode;
       },
       error: (err) => console.error(err)
     });
