@@ -11,7 +11,7 @@
     "currency": "Currency",
     "pay-frequency": "Pay frequency",
     "default-selected-frequency": "Yearly",
-    "selectable-frequencies": ["Semi monthly", "Monthly", "Yearly"],
+    "selectable-frequencies": ["Daily", "Weekly", "10 Days", "Semi monthly", "Monthly", "Yearly"],
     "salary": "Salary",
     "tax": "Tax",
     "calculate": "Calculate",

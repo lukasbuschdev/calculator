@@ -11,7 +11,7 @@
     "currency": "Moneda",
     "pay-frequency": "Frecuencia de pago",
     "default-selected-frequency": "Anual",
-    "selectable-frequencies": ["Quincenal", "Mensual", "Anual"],
+    "selectable-frequencies": ["Diaria", "Semanal", "Decenal", "Quincenal", "Mensual", "Anual"],
     "salary": "Salario",
     "tax": "Impuesto",
     "calculate": "Calcular",
