@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../services/language.service';
 
@@ -9,10 +9,6 @@ import { LanguageService } from '../services/language.service';
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.scss'
 })
-export class LegalNoticeComponent implements OnInit {
+export class LegalNoticeComponent {
   constructor(public languageService: LanguageService) { }
-
-  ngOnInit(): void {
-    this.languageService.switchLanguage('es');
-  }
 }
