@@ -1,4 +1,4 @@
-import { SalaryClass } from "../types/salary-class.type";
+import { SalaryClass } from "../types/types";
 
 export class SalaryClasses {
     static monthly: SalaryClass[] = [

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeRateService } from '../../services/exchange-rate.service';
 import { CommonModule } from '@angular/common';
-import { SalaryClass } from '../../types/salary-class.type';
+import { exchangeRates, SalaryClass } from '../../types/types';
 import { LanguageService } from '../../services/language.service';
 import { FormsModule } from '@angular/forms';
 import { SalaryClasses } from '../../classes/salary.class';
@@ -15,7 +15,7 @@ import { SalaryClasses } from '../../classes/salary.class';
 })
 export class CalculationComponent implements OnInit {
   salary: string = '';
-  currencies: any;
+  currencies: exchangeRates = {};
   selectedCurrency: string = 'MXN';
   selectedFrequency: string = '';
   selectableCurrencies: string[] = ['MXN', 'USD', 'EUR', 'CAD', 'CHF', 'GBP'];
@@ -105,7 +105,7 @@ export class CalculationComponent implements OnInit {
     const rateSelected = this.currencies[this.selectedCurrency].toFixed(2);
     const rateMXN = this.currencies['MXN'].toFixed(2);
 
-    const salaryInMXN = ((amount / rateSelected) * rateMXN).toFixed(2);
+    const salaryInMXN = ((amount / Number(rateSelected)) * Number(rateMXN)).toFixed(2);
 
     if(this.selectedFrequency === 'Yearly' || this.selectedFrequency === 'Anual') return (Number(salaryInMXN) / 12);
     return Number(salaryInMXN);
