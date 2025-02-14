@@ -72,11 +72,12 @@ export class SalaryClasses {
     ];
 
     static getSalaryClass(period: string) {
+        if(period === 'Yearly' || period === 'Anual') return SalaryClasses.monthly;
         if(period === 'Monthly' || period === 'Mensual') return SalaryClasses.monthly;
         if(period === 'Semi monthly' || period === 'Quincenal') return SalaryClasses.semiMonthly;
         if(period === '10 Days' || period === 'Decenal') return SalaryClasses.tenDays;
         if(period === 'Weekly' || period === 'Semanal') return SalaryClasses.weekly;
-        if(period === 'Daily' || period === 'Diario') return SalaryClasses.daily;
+        if(period === 'Daily' || period === 'Diaria') return SalaryClasses.daily;
         return SalaryClasses.monthly;
     }
       

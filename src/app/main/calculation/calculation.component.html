@@ -28,7 +28,7 @@
         </div>
         <div class="row between data-row">
             <div class="name">{{ languageService.translate('salary') }}:</div>
-            <input class="data" type="number" [(ngModel)]="salary">
+            <input class="data" type="number" [(ngModel)]="salary" (keyup.enter)="calculate()">
         </div>
     </div>
 
@@ -38,21 +38,23 @@
 
     <div class="column gap-20 result-container">
         <div class="align-center between gap-15">
-            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate('monthly') }}):</h3>
-            <h3 class="result">{{ monthlySalary }} MXN</h3>
+            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate(selectedFrequency.toLowerCase()) }}):</h3>
+            <ng-template #nonYearly>
+                <h3 class="result">{{ formatNumber(selectedSalary) }} MXN</h3>
+            </ng-template>
+            <h3 class="result" *ngIf="this.selectedFrequency === 'Yearly' || this.selectedFrequency === 'Anual'; else nonYearly">{{ formatNumber(selectedSalary * 12) }} MXN</h3>
         </div>
         <div class="align-center between gap-15">
-            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate('yearly') }}):</h3>
-            <h3 class="result">{{ yearlySalary }} MXN</h3>
+            <h3>{{ languageService.translate('salary') }} ({{ languageService.translate('monthly') }}):</h3>
+            <h3 class="result">{{ formatNumber(monthlySalary) }} MXN</h3>
         </div>
         <div class="division-line"></div>
         <div class="align-center between gap-15">
-            <h3>{{ languageService.translate('tax') }} ({{ languageService.translate('monthly') }}):</h3>
-            <h3 class="result">{{ taxPaidMonthly }} MXN</h3>
-        </div>
-        <div class="align-center between gap-15">
-            <h3>{{ languageService.translate('tax') }} ({{ languageService.translate('yearly') }}):</h3>
-            <h3 class="result">{{ taxPaidYearly }} MXN</h3>
+            <h3>{{ languageService.translate('tax') }} ({{ languageService.translate(selectedFrequency.toLowerCase()) }}):</h3>
+            <ng-template #nonYearlyTax>
+                <h3 class="result">{{ formatNumber(taxPaidSelected) }} MXN</h3>
+            </ng-template>
+            <h3 class="result" *ngIf="this.selectedFrequency === 'Yearly' || this.selectedFrequency === 'Anual'; else nonYearlyTax">{{ formatNumber(taxPaidSelected * 12) }} MXN</h3>
         </div>
     </div>
 </section>

@@ -24,15 +24,9 @@ export class CalculationComponent implements OnInit {
   isFrequencyOpened: boolean = false;
   isSelected: boolean = false;
   result: number = 0;
-  monthlySalary: string = '0';
-  yearlySalary: string = '0';
-  taxPaidYearly: string = '0';
-  taxPaidMonthly: string = '0';
-
-
-
-
-
+  selectedSalary: number = 0;
+  monthlySalary: number = 0;
+  taxPaidSelected: number = 0;
 
   
   constructor(public languageService: LanguageService, private exchangeRateService: ExchangeRateService) {}
@@ -88,19 +82,19 @@ export class CalculationComponent implements OnInit {
     this.selectedFrequency = selected;
   }
 
+
+  // CALCULATIONS
+
   calculate(): void {
     const convertedSalary = this.convertCurrency(this.salary);
-    const convertedMonthlySalary = this.convertToMonthlySalary(convertedSalary);
+    const salaryClass = this.checkSalaryRange(convertedSalary);
+    const calculatedSalary = this.calculateSalary(convertedSalary, salaryClass);
+    const convertedMonthlySalary = this.convertToMonthlySalary(calculatedSalary);
 
-    console.log(convertedMonthlySalary)
+    const formattedCalculatedSalary = Number(calculatedSalary.toFixed(2));
+    const formattedMonthlySalary = Number(convertedMonthlySalary.toFixed(2));
 
-    const salaryClass = this.checkSalaryRange(convertedMonthlySalary);
-    const calculatedSalary = this.calculateSalary(convertedMonthlySalary, salaryClass);
-
-    const formattedYearlySalary = this.formatNumber(Number(calculatedSalary.toFixed(2)));
-    const formattedMonthlySalary = this.formatNumber(Number((calculatedSalary / 12).toFixed(2)));
-
-    this.yearlySalary = formattedYearlySalary;
+    this.selectedSalary = formattedCalculatedSalary;
     this.monthlySalary = formattedMonthlySalary;
 
     this.salary = '';
@@ -112,15 +106,15 @@ export class CalculationComponent implements OnInit {
     const rateMXN = this.currencies['MXN'].toFixed(2);
 
     const salaryInMXN = ((amount / rateSelected) * rateMXN).toFixed(2);
+
+    if(this.selectedFrequency === 'Yearly' || this.selectedFrequency === 'Anual') return (Number(salaryInMXN) / 12);
     return Number(salaryInMXN);
   }
 
-  convertToMonthlySalary(salary: number): number { 
-    console.log(salary)
-    if(this.selectedFrequency === 'Yearly' || this.selectedFrequency === 'Anual') return Number(salary / 12);
+  convertToMonthlySalary(salary: number): number {
     if(this.selectedFrequency === 'Semi monthly' || this.selectedFrequency === 'Quincenal') return Number(salary * 2);
     if(this.selectedFrequency === '10 Days' || this.selectedFrequency === 'Decenal') return Number(salary * 3);
-    if(this.selectedFrequency === 'Weekly' || this.selectedFrequency === 'Semanal') return Number(salary * 4);
+    if(this.selectedFrequency === 'Weekly' || this.selectedFrequency === 'Semanal') return Number(salary / 7 * 30);
     if(this.selectedFrequency === 'Daily' || this.selectedFrequency === 'Diaria') return Number(salary * 30);
     return salary;
   }
@@ -130,25 +124,19 @@ export class CalculationComponent implements OnInit {
       (salary: SalaryClass) => convertedSalary > salary.min && convertedSalary <= salary.max
     );
 
-    console.log(SalaryClasses.getSalaryClass(this.selectedFrequency), salaryClass)
-
     return salaryClass ? salaryClass : { min: 0, max: 0, fee: 0, percent: 0 };
   }
 
   calculateSalary(convertedSalary: number, salaryClass: SalaryClass): number {
-    const taxMonthly = (convertedSalary - salaryClass.min) * (salaryClass.percent / 100) + salaryClass.fee;
-    const taxYearly = taxMonthly * 12;
-    
-    this.taxPaidYearly = this.formatNumber(Number(taxYearly.toFixed(2)));
-    this.taxPaidMonthly = this.formatNumber(Number(taxMonthly.toFixed(2)));
-    
-    const calculatedSalary = (convertedSalary - taxMonthly) * 12;
+    const taxSelected = (convertedSalary - salaryClass.min) * (salaryClass.percent / 100) + salaryClass.fee;
+    this.taxPaidSelected = taxSelected;
+    const calculatedSalary = (convertedSalary - taxSelected);
     
     return Number(calculatedSalary.toFixed(2));
   }
 
   formatNumber(num: number): string {
-    const parts = num.toString().split('.');
+    const parts = num.toFixed(2).split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
   }
