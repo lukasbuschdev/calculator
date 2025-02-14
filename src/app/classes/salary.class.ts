@@ -72,13 +72,12 @@ export class SalaryClasses {
     ];
 
     static getSalaryClass(period: string) {
-        switch (period) {
-            case 'Monthly': return SalaryClasses.monthly;
-            case 'Semi monthly': return SalaryClasses.semiMonthly;
-            case '10 Days': return SalaryClasses.tenDays;
-            case 'Weekly': return SalaryClasses.weekly;
-            case 'Daily': return SalaryClasses.daily;
-            default: return SalaryClasses.monthly;
-        }
+        if(period === 'Monthly' || period === 'Mensual') return SalaryClasses.monthly;
+        if(period === 'Semi monthly' || period === 'Quincenal') return SalaryClasses.semiMonthly;
+        if(period === '10 Days' || period === 'Decenal') return SalaryClasses.tenDays;
+        if(period === 'Weekly' || period === 'Semanal') return SalaryClasses.weekly;
+        if(period === 'Daily' || period === 'Diario') return SalaryClasses.daily;
+        return SalaryClasses.monthly;
     }
+      
 }

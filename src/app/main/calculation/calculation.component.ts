@@ -130,7 +130,7 @@ export class CalculationComponent implements OnInit {
       (salary: SalaryClass) => convertedSalary > salary.min && convertedSalary <= salary.max
     );
 
-    // console.log(salaryClass)
+    console.log(salaryClass)
 
     return salaryClass ? salaryClass : { min: 0, max: 0, fee: 0, percent: 0 };
   }
