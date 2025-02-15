@@ -17,8 +17,9 @@ export class CalculationComponent implements OnInit {
   salary: string = '';
   currencies: exchangeRates = {};
   selectedCurrency: string = 'MXN';
-  selectableCurrencies: string[] = ['MXN', 'USD', 'EUR', 'CAD', 'CHF', 'GBP'];
   selectedFrequency: string = '';
+  selectableCurrencies: string[] = ['MXN', 'USD', 'EUR', 'CAD', 'CHF', 'GBP'];
+  selectableFrequencies: string[] = [];
   isCurrencyOpened: boolean = false;
   isFrequencyOpened: boolean = false;
   isSelected: boolean = false;
@@ -31,7 +32,13 @@ export class CalculationComponent implements OnInit {
   constructor(public languageService: LanguageService, private exchangeRateService: ExchangeRateService) {}
 
   ngOnInit(): void {
-    this.selectedFrequency = this.languageService.translate('default-selected-frequency');
+    this.languageService.switchLanguage('es');
+    this.languageService.translations$.subscribe( translations => {
+      if(translations) {
+        this.selectableFrequencies = translations['selectable-frequencies'];
+        this.selectedFrequency = translations['default-selected-frequency'] || 'Anual';
+      }
+    });
 
     this.exchangeRateService.getExchangeRates().subscribe({
       next: (data) => {
@@ -81,7 +88,6 @@ export class CalculationComponent implements OnInit {
   calculate(): void {
     const convertedSalary = this.convertCurrency(this.salary);
     const salaryClass = this.checkSalaryRange(convertedSalary);
-    
     const calculatedSalary = this.calculateSalary(convertedSalary, salaryClass);
     const convertedMonthlySalary = this.convertToMonthlySalary(calculatedSalary);
 
@@ -90,6 +96,7 @@ export class CalculationComponent implements OnInit {
 
     this.selectedSalary = formattedCalculatedSalary;
     this.monthlySalary = formattedMonthlySalary;
+
     this.salary = '';
   }
 
@@ -132,9 +139,5 @@ export class CalculationComponent implements OnInit {
     const parts = num.toFixed(2).split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
-  }
-
-  get selectableFrequencies() {
-    return this.languageService.getFrequencies();
   }
 }

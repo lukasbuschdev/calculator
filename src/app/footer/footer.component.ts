@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../services/language.service';
 
@@ -9,6 +9,10 @@ import { LanguageService } from '../services/language.service';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   constructor(public languageService: LanguageService) { }
+
+  ngOnInit(): void {
+    this.languageService.switchLanguage('es');
+  }
 }
