@@ -1,33 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import es from '../../assets/languages/es.json';
+import en from '../../assets/languages/en.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
-  private translationsSubject = new BehaviorSubject<any>({});
-  public translations$ = this.translationsSubject.asObservable();
   public isActiveLanguage = 'es';
 
-  constructor(private http: HttpClient) { }
-
-  loadTranslations(languageCode: string): Observable<any> {
-    return this.http.get(`./assets/languages/${languageCode}.json`);
+  constructor() { 
+    this.switchLanguage(this.isActiveLanguage)
   }
 
   switchLanguage(languageCode: string): void {
-    this.loadTranslations(languageCode).subscribe({
-      next: (data) => {
-        this.translationsSubject.next(data);
-        this.isActiveLanguage = languageCode;
-      },
-      error: (err) => console.error(err)
-    });
+    this.isActiveLanguage = languageCode;
+    console.log(this.isActiveLanguage)
   }
 
-  translate(key: string): string {
-    const translations = this.translationsSubject.getValue();
-    return translations[key] || key;
+  translate(key: any): string {
+    const translation = this.getActive()[key as keyof typeof this.getActive];
+    return Array.isArray(translation) ? key : translation;  
+  }
+
+  getFrequencies(): string[] {
+    return this.getActive()['selectable-frequencies'];
+  }
+
+  getActive(): typeof en {
+    return this.isActiveLanguage == 'es' ? es : en;
   }
 }

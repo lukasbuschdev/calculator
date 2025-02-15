@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LanguageService } from '../services/language.service';
 
 @Component({
@@ -8,10 +8,6 @@ import { LanguageService } from '../services/language.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(public languageService: LanguageService) { }
-
-  ngOnInit(): void {
-    this.languageService.switchLanguage('es')
-  }
 }
