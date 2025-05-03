@@ -7,11 +7,14 @@ footer {
     color: $white;
     background-color: $red;
 
-    .legal-notice:hover,
-    .logo:hover {
-        cursor: pointer;
-        color: $brown;
-        transition: all 125ms ease-in-out;
+    .legal-notice,
+    .logo,
+    a {
+        &:hover {
+            cursor: pointer;
+            color: $brown;
+            transition: all 125ms ease-in-out;
+        }
     }
 }
 
